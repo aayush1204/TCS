@@ -14,6 +14,8 @@ import textstat
 
 from .models import Laws
 
+import requests
+
 #utility function to read files (ToS) to an list of paragraphs.
 def read_file_to_paragraphs(file_path):
     file = open(file_path, 'r', encoding="utf8")
@@ -294,10 +296,11 @@ def index2(request):
     
     y = textstat.flesch_reading_ease(summ)
 
-    # Uses Cookies - privacy
+# Uses Cookies - privacy
 # Uses and shares Personal data - privacy
 # store data anywhere around the world - privacy
 # does not track you - privacy
+
 
 
 # for i in summary['Copyright']:
@@ -329,3 +332,15 @@ def countrylaws(request):
         ls.append(i.country)
     print(ls)    
     return render(request, 'laws.html',{'data':data})
+
+def sitebreach(request):
+    url = "https://haveibeenpwned.com/api/v2/breaches?domain=adobe.com" 
+    response = requests.get(url).json()
+    print(response)
+
+    desc = response[0]['Description']
+    dataclasses = response[0]['DataClasses']
+    date = response[0]['BreachDate']
+
+    return render(request, 'sitebreach.html', {'response':response, 'desc':desc, 'dataclasses':dataclasses,
+                                                'date': date})
