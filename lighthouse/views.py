@@ -12,6 +12,8 @@ import re
 
 import textstat
 
+from .models import Laws
+
 #utility function to read files (ToS) to an list of paragraphs.
 def read_file_to_paragraphs(file_path):
     file = open(file_path, 'r', encoding="utf8")
@@ -319,3 +321,11 @@ def index2(request):
 #     print("this service does not track you")
 #     print("track")      
     return render(request, 'index.html',{'summary_list':summary, 'x':x, 'y':summ})
+
+def countrylaws(request):
+    data = Laws.objects.all()
+    ls = []
+    for i in data:
+        ls.append(i.country)
+    print(ls)    
+    return render(request, 'laws.html',{'data':data})

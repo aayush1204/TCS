@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="chartdiv"></div>
+    <div id = "laws">
+
+        <!-- {% for i in data %}
+        <span>{{i.country}}</span>
+        <br>
+        <span>{{i.law}}</span>
+        <br>
+        <br>
+        {%endfor%} -->
+    </div>
+</body>
+<!-- Styles -->
+<style>
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+    
+    </style>
+    
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/worldLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/dataviz.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    
+    <!-- Chart code -->
+    <script>
+    am4core.ready(function() {
+    
+    // Themes begin
+    am4core.useTheme(am4themes_dataviz);
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+    
+    // Create map instance
+    var chart = am4core.create("chartdiv", am4maps.MapChart);
+    
+    // Set map definition
+    chart.geodata = am4geodata_worldLow;
+    
+    // Set projection
+    chart.projection = new am4maps.projections.NaturalEarth1();
+    
+    // Create map polygon series
+    var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+    polygonSeries.mapPolygons.template.strokeWidth = 0.5;
+    
+    // Exclude Antartica
+    polygonSeries.exclude = ["AQ"];
+    //['AR','AU','BR','BS','CA','CO','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IN','IT','JP','LV','LU','MT','MA','NZ','NO','PH','PL','PT','RO','RU','SI','ZA','KR','ES','CH','TW','GB','US']
+    //['Argentina', 'Australia', 'Brazil', 'Bahamas', 'Canada', 'Columbia', 'Czech Republic', 'Denmark', 'Estonia', 'Estonia', 'European Union', 'Finland', 'France', 'Germany', 'Greece', 'Hong Kong', 'Hungary', 'Iceland', 'Ireland', 'India', 'Italy', 'Japan', 'Latvia', 'Luxemborg', 'Malta', 'Mexico', 'Morocco', 'New Zealand', 'Norway', 'The Philippines', 'Poland', 'Portugal', 'Romania', 'Russia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Switzerland', 'Taiwan', 'United Kingdom', 'United State']
+    // Make map load polygon (like country names) data from GeoJSON
+    polygonSeries.useGeodata = true;
+    
+    // Configure series
+    var polygonTemplate = polygonSeries.mapPolygons.template;
+    polygonTemplate.tooltipText = "{name}";
+    polygonTemplate.fill = chart.colors.getIndex(0);
+    
+    // Create hover state and set alternative fill color
+    var hs = polygonTemplate.states.create("hover");
+    hs.properties.fill = chart.colors.getIndex(2);
+    
+    // Create active state
+    var activeState = polygonTemplate.states.create("active");
+    activeState.properties.fill = chart.colors.getIndex(4);
+    
+    // Create an event to toggle "active" state
+    polygonTemplate.events.on("hit", function(ev) {
+      ev.target.isActive = !ev.target.isActive;
+      console.log(ev.target.dataItem.dataContext.id)
+
+        var countryname = ev.target.dataItem.dataContext.name
+      document.getElementById("laws").innerHTML="";
+
+      {% for i in data %}
+        if(countryname ==  '{{i.country}}')
+        {
+            console.log('{{i.country}}')
+
+            var html = `{{i.law}}`;
+
+            document.getElementById("laws").innerHTML=html;
+        }        
+        {%endfor%}
+
+
+    })
+    
+    
+    var graticuleSeries = chart.series.push(new am4maps.GraticuleSeries());
+    
+    }); // end am4core.ready()
+    </script>
+    
+    <!-- HTML -->
+    
+</html>
