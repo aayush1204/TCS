@@ -279,52 +279,60 @@ def loadText(text):
     return raw
  
 def index2(request):
-    
-    tos_text = loadText("data/Google.txt")   
+    if request.method == "POST":
+        tos_text = loadText("data/Google.txt")   
 
-    summary = summarizeAlgo(tos_text)
-    # for key in summary:
-    #     print(key)
-    #     print(summary[key])
-    #     print()
-    
-    x = textstat.flesch_reading_ease(tos_text)
-    summ = ""
-    for key , values in summary.items():
-        for i in values:
-            summ = summ + i
-    
-    y = textstat.flesch_reading_ease(summ)
+        tos_text = request.POST['toctext']
+        
+        summary = summarizeAlgo(tos_text)
+        # for key in summary:
+        #     print(key)
+        #     print(summary[key])
+        #     print()
+        
+        x = textstat.flesch_reading_ease(tos_text)
+        summ = ""
+        for key , values in summary.items():
+            for i in values:
+                summ = summ + i
+        
+        y = textstat.flesch_reading_ease(summ)
 
-# Uses Cookies - privacy
-# Uses and shares Personal data - privacy
-# store data anywhere around the world - privacy
-# does not track you - privacy
+    # from gensim.summarization import keywords
+
+    # print 'Keywords:'
+    # print keywords(text, ratio=0.15)
+
+    # Uses Cookies - privacy
+    # Uses and shares Personal data - privacy
+    # store data anywhere around the world - privacy
+    # does not track you - privacy
 
 
 
-# for i in summary['Copyright']:
-#   if(('name'and'use'and'information'and'show') in i):
-#     print(i)
-# print("eewe")
-# for i in summary['Privacy']:
-#   if(('cookies' in i) and ('collect' in i)):
-#     print(i)
-#     print("collects cookies")    
+    # for i in summary['Copyright']:
+    #   if(('name'and'use'and'information'and'show') in i):
+    #     print(i)
+    # print("eewe")
+    # for i in summary['Privacy']:
+    #   if(('cookies' in i) and ('collect' in i)):
+    #     print(i)
+    #     print("collects cookies")    
 
-#   if(('personal data' in i) and ('use' in i)):
-#     print(i)
-#     print("collects and Uses personal data")      
+    #   if(('personal data' in i) and ('use' in i)):
+    #     print(i)
+    #     print("collects and Uses personal data")      
 
-#   if(('data' in i) and ('store' in i) and ('world' in i)):
-#     print(i)
-#     print("collects and Uses personal data")  
+    #   if(('data' in i) and ('store' in i) and ('world' in i)):
+    #     print(i)
+    #     print("collects and Uses personal data")  
 
-#   if(('does not track' in i)):
-#     print("this service does not track you")
-#     print("track")      
-    return render(request, 'index.html',{'summary_list':summary, 'x':x, 'y':summ})
+    #   if(('does not track' in i)):
+    #     print("this service does not track you")
+    #     print("track")      
+        return render(request, 'summary.html',{'summary_list':summary, 'x':x, 'y':summ})
 
+    return render(request, 'index.html',)
 def countrylaws(request):
     data = Laws.objects.all()
     ls = []
@@ -344,3 +352,6 @@ def sitebreach(request):
 
     return render(request, 'sitebreach.html', {'response':response, 'desc':desc, 'dataclasses':dataclasses,
                                                 'date': date})
+
+
+
