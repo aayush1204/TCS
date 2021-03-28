@@ -6,13 +6,13 @@
     </head>
     <body>
       <nav>
-        <p class="navheading"><a href="landing.html" class="nonblue"> LIGHT HOUSE</p></a> 
-    <ul>
-        <li><a href="#">Menu 1</a></li>
-        <li><a href="#">Menu 2</a></li>
-        <li><a href="#">Menu 3</a></li>
-        <li><a href="#">Menu 4</a></li>
-    </ul>
+        <p class="navheading"><a href="{% url 'index2' %}" class="nonblue"> LIGHT HOUSE</p></a> 
+        <ul>
+            <li><a href="{% url 'laws' %}">Law Map</a></li>
+            <li><a href="{% url 'index2' %}">Home</a></li>
+            <li><a href="#">Menu 3</a></li>
+            <li><a href="#">Menu 4</a></li>
+        </ul>
 </nav>
           <p class="heading">Summary</p>
 

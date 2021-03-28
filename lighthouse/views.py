@@ -369,6 +369,14 @@ def countrylaws(request):
     for i in data:
         ls.append(i.country)
     print(ls)    
+    return render(request, 'mainlaws.html',{'data':data})
+
+def laws(request):
+    data = Laws.objects.all()
+    ls = []
+    for i in data:
+        ls.append(i.country)
+    print(ls)    
     return render(request, 'laws.html',{'data':data})
 
 def sitebreach(request):
