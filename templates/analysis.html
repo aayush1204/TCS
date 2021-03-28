@@ -48,19 +48,35 @@
     <p class="heading"> Analysis </p>
     <div id="textbox" style="clear: both;">
         <p class="alignleft">Uses Cookies</p>
-        <p class="alignright">{{data.q1}}</p>
+        {%if data.q1 == 1 %}
+        <p class="alignright">YES</p>
+        {%else %}
+        <p class="alignright">No</p>
+        {%endif%}
       </div>
       <div id="textbox" style="clear: both;">
         <p class="alignleft">Uses and shares Personal data</p>
-        <p class="alignright">{{data.q2}}</p>
+        {%if data.q2 == 1 %}
+        <p class="alignright">YES</p>
+        {%else %}
+        <p class="alignright">No</p>
+        {%endif%}
       </div>
       <div id="textbox" style="clear: both;">
         <p class="alignleft">Store data anywhere around the world </p>
-        <p class="alignright">{{data.q3}}</p>
+        {%if data.q3 == 1 %}
+        <p class="alignright">YES</p>
+        {%else %}
+        <p class="alignright">No</p>
+        {%endif%}
       </div>
       <div id="textbox" style="clear: both;">
         <p class="alignleft">Website does not track you </p>
-        <p class="alignright">{{data.q4}}</p>
+        {%if data.q4 == 1 %}
+        <p class="alignright">YES</p>
+        {%else %}
+        <p class="alignright">No</p>
+        {%endif%}
       </div>
       <div id="textbox" style="clear: both;">
         <p class="alignleft">Flesch Readbility Score</p>
@@ -68,7 +84,7 @@
       </div>
       <div id="textbox" style="clear: both;">
         <p class="alignleft">Overall Score</p>
-        <p class="alignright">{{data.overall_score}}</p>
+        <p class="alignright">{{data.overall_score}} / 5</p>
       </div>
       
       <button class="leftbutton">Detailed Analysis</button>
