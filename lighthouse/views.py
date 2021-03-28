@@ -12,10 +12,18 @@ import re
 
 import textstat
 
-from .models import Laws
+from .models import Laws, Score
 
 import requests
 
+q1 = 1
+q2 = 0
+q3 = 0
+q4 = 0
+q5 = 0
+
+overall_score = 0
+read_score = 0
 #utility function to read files (ToS) to an list of paragraphs.
 def read_file_to_paragraphs(file_path):
     file = open(file_path, 'r', encoding="utf8")
@@ -290,13 +298,13 @@ def index2(request):
         #     print(summary[key])
         #     print()
         
-        x = textstat.flesch_reading_ease(tos_text)
+        read_score = textstat.flesch_reading_ease(tos_text)
         summ = ""
         for key , values in summary.items():
             for i in values:
                 summ = summ + i
         
-        y = textstat.flesch_reading_ease(summ)
+        #  = textstat.flesch_reading_ease(summ)
 
     # from gensim.summarization import keywords
 
@@ -350,7 +358,9 @@ def index2(request):
                 temp = temp + i
             ab[key] = temp
 
-        return render(request, 'summary.html',{'summary_list':ab, 'x':x, 'y':summ, 'overall_score':overall_score})
+        Score.objects.create(q1 = q2, q2 = q3, q3=q4, q4=q5, read_score = read_score, overall_score = overall_score)
+
+        return render(request, 'summary.html',{'summary_list':ab, 'x':read_score, 'y':summ, 'overall_score':overall_score})
 
     return render(request, 'index.html',)
 def countrylaws(request):
@@ -374,5 +384,6 @@ def sitebreach(request):
                                                 'date': date})
 
 def analysis(request):
-    return render(request, 'analysis.html')
+    data = Score.objects.all().last()
+    return render(request, 'analysis.html', {'data':data})
 

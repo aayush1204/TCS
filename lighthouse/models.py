@@ -9,3 +9,10 @@ class Laws(models.Model):
 
     def __str__(self):
         return self.country
+class Score(models.Model):
+    overall_score = models.IntegerField()
+    read_score = models.FloatField()
+    q1 = models.IntegerField()
+    q2 = models.IntegerField()
+    q3 = models.IntegerField()
+    q4 = models.IntegerField()
