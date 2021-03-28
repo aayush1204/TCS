@@ -63,43 +63,6 @@ def create_topic_pars(pars, tokenizer, stemmer, stop_words, ldamodel, word_dicti
                         break
     return(tagged_pars)
 
-def index(request):
-    
-
-    tokenizer = RegexpTokenizer(r'\w+')
-
-    p_stemmer = PorterStemmer()
-    stopwords = nltk.corpus.stopwords.words('english')
-
-    norm_texts = [tokenize_and_stem(par, tokenizer, p_stemmer, stopwords) for par in pars]
-
-    # turn our tokenized documents into a id <-> term dictionary
-    dictionary = corpora.Dictionary(norm_texts)
-    
-    #saving the dictionary object to used later (in the web app).
-    dictionary.save('lda_dictionary')
-
-    bows = [dictionary.doc2bow(text) for text in norm_texts]
-    len(bows)
-    
-    ldamodel = gensim.models.ldamodel.LdaModel(bows, num_topics=10, id2word = dictionary, passes=20)
-    ldamodel.print_topics()
-
-    ldamodel.save('lda_model')
-
-    #this topic list can be expanded with more topics and more words related to those topics.
-    topic_dic = {'privacy': ['privacy'], 'copyright': ['copyright'], 'content sharing/use': ['share'], 
-                'cancelation/termination': ['cancelation', 'termination'], 'modification/pricing': ['modification', 'pricing'], 
-                'special': ['law', 'jurisdiction', 'governing']}
-
-    new_pars = read_file_to_paragraphs('data/tos 6.txt')
-
-    topic_pars = create_topic_pars(new_pars, tokenizer, p_stemmer, stopwords, ldamodel, dictionary, topic_dic)            
-
-    # print(topic_pars)
-    x = len(topic_pars)
-    return render(request, "index.html", {'summary_list':topic_pars, 'x':x})
-
 # Importing all the necessary libraries
 import nltk, re, numpy as np
 import urllib
