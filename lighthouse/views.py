@@ -283,7 +283,7 @@ def index2(request):
         tos_text = loadText("data/Google.txt")   
 
         tos_text = request.POST['toctext']
-        
+
         summary = summarizeAlgo(tos_text)
         # for key in summary:
         #     print(key)
@@ -309,28 +309,39 @@ def index2(request):
     # does not track you - privacy
 
 
+        q1 = 1
+        q2 = 0
+        q3 = 0
+        q4 = 0
+        q5 = 0
+        # for i in summary['Copyright']:
+        #     if(('name'and'use'and'information'and'show') in i):
+        #         print(i)
+        #         print("eewe")
+        #         q1 = q1+1
+        for i in summary['Privacy']:
+            if(('cookies' in i) and ('collect' in i)):
+                print(i)
+                print("collects cookies")    
+                q2 = q2 + 1
 
-    # for i in summary['Copyright']:
-    #   if(('name'and'use'and'information'and'show') in i):
-    #     print(i)
-    # print("eewe")
-    # for i in summary['Privacy']:
-    #   if(('cookies' in i) and ('collect' in i)):
-    #     print(i)
-    #     print("collects cookies")    
+            if(('personal data' in i) and ('use' in i)):
+                print(i)
+                print("collects and Uses personal data")      
+                q3 = q3 + 1
+            if(('data' in i) and ('store' in i) and ('world' in i)):
+                print(i)
+                print("stores data anywhere in the world personal data")  
+                q4 = q4 + 1
 
-    #   if(('personal data' in i) and ('use' in i)):
-    #     print(i)
-    #     print("collects and Uses personal data")      
+            if(('does not track' in i)):
+                print("this service does not track you")
+                q5 = q5 + 1
+                print("track")      
 
-    #   if(('data' in i) and ('store' in i) and ('world' in i)):
-    #     print(i)
-    #     print("collects and Uses personal data")  
-
-    #   if(('does not track' in i)):
-    #     print("this service does not track you")
-    #     print("track")      
-        return render(request, 'summary.html',{'summary_list':summary, 'x':x, 'y':summ})
+        overall_score = q1 + q2 + q3 + q4 + q5 
+        overall_score = 5 - overall_score
+        return render(request, 'summary.html',{'summary_list':summary, 'x':x, 'y':summ, 'overall_score':overall_score})
 
     return render(request, 'index.html',)
 def countrylaws(request):
