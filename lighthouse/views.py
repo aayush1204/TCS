@@ -292,16 +292,20 @@ def laws(request):
     return render(request, 'laws.html',{'data':data})
 
 def sitebreach(request):
-    url = "https://haveibeenpwned.com/api/v2/breaches?domain=adobe.com" 
-    response = requests.get(url).json()
-    print(response)
 
-    desc = response[0]['Description']
-    dataclasses = response[0]['DataClasses']
-    date = response[0]['BreachDate']
+    if request.method == "POST":
+        domain = request.POST['domain']
+        url = "https://haveibeenpwned.com/api/v2/breaches?domain=" + domain 
+        response = requests.get(url).json()
+        print(response)
 
-    return render(request, 'sitebreach.html', {'response':response, 'desc':desc, 'dataclasses':dataclasses,
+        desc = response[0]['Description']
+        dataclasses = response[0]['DataClasses']
+        date = response[0]['BreachDate']
+
+        return render(request, 'news.html', {'response':response, 'desc':desc, 'dataclasses':dataclasses,
                                                 'date': date})
+    return render(request, 'news.html')
 
 def analysis(request):
     data = Score.objects.all().last()

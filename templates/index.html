@@ -1,20 +1,31 @@
 {% load static%}
 <!DOCTYPE html>
+
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'landing.css' %}">
         
     </head>
     <body>
-        <p class="heading">Light House</p>
-       <div class="mainform"> <form method = "post" action="{% url 'index2' %}">
-           {% csrf_token %}
-            <input type="text" placeholder="Enter the link" class="link">
-            <br>
-            <textarea class="paste" id="toctext" name="toctext" placeholder="Or Paste Text"></textarea>
-            <br>
-            <button> Submit</button>
-        </form>
-    </div>
+        <nav>
+            <p class="navheading"><a href="{% url 'index2' %}" class="nonblue"> LIGHT HOUSE</p></a> 
+        <ul>
+            <li><a href="{% url 'laws' %}">Law Map</a></li>
+            <li><a href="{% url 'index2' %}">Home</a></li>
+            <li><a href="{% url 'sitebreach' %}">News</a></li>
+            <li><a href="#">Menu 4</a></li>
+        </ul>
+    </nav>
+    <br>
+        <p class="plum">Light House</p>
+        <div class="mainform"> <form method = "post" action="{% url 'index2' %}">
+            {% csrf_token %}
+             <input type="text" placeholder="Enter the link" class="link">
+             <br>
+             <textarea class="paste" id="toctext" name="toctext" placeholder="Or Paste Text"></textarea>
+             <br>
+             <button> Submit</button>
+         </form>
+     </div>
     </body>
 </html>
