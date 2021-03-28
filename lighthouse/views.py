@@ -64,11 +64,7 @@ def create_topic_pars(pars, tokenizer, stemmer, stop_words, ldamodel, word_dicti
     return(tagged_pars)
 
 def index(request):
-    pars = read_file_to_paragraphs('Google.txt')
-    pars.extend(read_file_to_paragraphs('data/Facebook.txt'))
-    pars.extend(read_file_to_paragraphs('data/Slack.txt'))
-    pars.extend(read_file_to_paragraphs('data/Spotify.txt'))
-    pars.extend(read_file_to_paragraphs('data/Twitter.txt'))
+    
 
     tokenizer = RegexpTokenizer(r'\w+')
 
@@ -288,7 +284,7 @@ def loadText(text):
  
 def index2(request):
     if request.method == "POST":
-        tos_text = loadText("Google.txt")   
+          
 
         tos_text = request.POST['toctext']
 
