@@ -1,20 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        {{summary_list}}
-        <br>
-        {{x}}
-        <br>
-        {{y}}
-        <br>
-        {{overall_score}}
-    </div>
-</body>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'summary.css' %}">
+    </head>
+    <body>
+      <nav>
+        <p class="navheading"><a href="landing.html" class="nonblue"> LIGHT HOUSE</p></a> 
+    <ul>
+        <li><a href="#">Menu 1</a></li>
+        <li><a href="#">Menu 2</a></li>
+        <li><a href="#">Menu 3</a></li>
+        <li><a href="#">Menu 4</a></li>
+    </ul>
+</nav>
+          <p class="heading">Summary</p>
+
+          <div class="left">
+<textarea class="maintxt">
+ {% for key, value in summary_list.items %}
+    {{key}}
+    {{value}}
+
+ {% endfor %}
+</textarea>
+
+<div class="leftbtn"><button class="leftbutton">DOWNLOAD</button></div>
+<div class="rightbtn"><button class="rightbutton">COMPARE</button></div>
+          </div>
+          <div class="right">
+            <iframe src="{% url 'analysis' %}">
+                </iframe>
+          </div>
+    </body>
 </html>

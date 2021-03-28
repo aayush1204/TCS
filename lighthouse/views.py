@@ -341,7 +341,16 @@ def index2(request):
 
         overall_score = q1 + q2 + q3 + q4 + q5 
         overall_score = 5 - overall_score
-        return render(request, 'summary.html',{'summary_list':summary, 'x':x, 'y':summ, 'overall_score':overall_score})
+
+        ab = {}
+        temp = ""
+        for key, value in summary.items():
+            temp = ""
+            for i in value:
+                temp = temp + i
+            ab[key] = temp
+
+        return render(request, 'summary.html',{'summary_list':ab, 'x':x, 'y':summ, 'overall_score':overall_score})
 
     return render(request, 'index.html',)
 def countrylaws(request):
@@ -364,5 +373,6 @@ def sitebreach(request):
     return render(request, 'sitebreach.html', {'response':response, 'desc':desc, 'dataclasses':dataclasses,
                                                 'date': date})
 
-
+def analysis(request):
+    return render(request, 'analysis.html')
 

@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Proza+Libre:wght@700&family=Red+Hat+Display:wght@700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  width: 100%;
+  font-weight: bold;
+  font-family: "Red Hat Display", sans-serif;
+  height: 9vh;
+  background-color: rgb(0, 0, 0);
+}
+
+nav ul {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 50%;
+}
+
+nav a {
+  text-transform: uppercase;
+  color: black;
+  font-weight: bold;
+}
+
+nav li {
+  background-color: rgb(187, 165, 165);
+  padding: 7px 20px;
+  border-radius: 10px;
+}
+.heading {
+  text-align: center;
+  font-size: 64px;
+  font-family: "Red Hat Display";
+  color: white;
+  margin-top: 1%;
+}
+.navheading {
+  font-size: 45px;
+  font-family: "Proza Libre";
+  color: white;
+  float: left;
+  position: absolute;
+  margin-left: 2%;
+}
+body {
+  background-color: #002233;
+  font-family: "Red Hat One";
+}
+.nonblue {
+  color: white;
+}
+.left {
+  float: left;
+  margin-left: -2%;
+}
+.right {
+  float: right;
+  margin-right: 5%;
+  margin-top: 0%;
+}
+.maintxt {
+  margin-left: 10%;
+  width: 600px;
+  margin-top: 2%;
+  height: 320px;
+  outline: none;
+  background-color: #acabab;
+  font-family: "Red Hat Display";
+  overflow: auto;
+  padding: 10px;
+}
+.leftbtn {
+  float: left;
+  margin-left: 10%;
+}
+
+.rightbtn {
+  float: right;
+}
+.leftbutton,
+.rightbutton {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 40px;
+  border: 0px;
+  margin-top: 10%;
+  font-family: "Red Hat Display";
+  font-size: 24px;
+}
+button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  transition: 0.4s ease;
+}
+button:focus {
+  outline: none;
+}
+.rightbutton {
+  margin-left: -155%;
+}
+iframe {
+  border: 0px;
+  width: 500px;
+  height: 500px;
+}

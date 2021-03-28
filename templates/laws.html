@@ -85,7 +85,7 @@
         var countryname = ev.target.dataItem.dataContext.name
       document.getElementById("laws").innerHTML="";
 
-      {% for i in data %}
+        {% for i in data %}
         if(countryname ==  '{{i.country}}')
         {
             console.log('{{i.country}}')
@@ -93,7 +93,7 @@
             var html = `{{i.law}}`;
 
             document.getElementById("laws").innerHTML=html;
-        }        
+      }        
         {%endfor%}
 
 
